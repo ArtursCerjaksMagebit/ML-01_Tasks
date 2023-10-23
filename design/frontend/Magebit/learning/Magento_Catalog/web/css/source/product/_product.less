@@ -1,0 +1,233 @@
+//Since the scope of this task is limited to just simple products, I won't change global styles
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.parent-size {
+    width: 100%;
+    height: 100%;
+}
+
+.page-title {
+    font-size: 32px;
+    line-height: 43px;
+    font-weight: 600;
+}
+
+.descriptor-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.value > *{
+    margin: 0;
+    font-size: 12px;
+}
+
+.attributes-list {
+    padding-left: 13px;
+    margin: 0 0 13px 0;
+
+    font-size: 14px;
+    line-height: 19px;
+}
+
+#block-related-heading {
+    display: block;
+    width: 100%;
+
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #C2C2C2;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.related-item-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333333;
+    &:hover,&:visited {
+        text-decoration: none;
+        color: #333333;
+    }
+}
+.related-available {
+    width: 204px;
+    margin: 0;
+    padding: 0;
+}
+.related.block {
+    min-height: 526px;
+}
+
+.product-item-photo {
+    margin-bottom: 10px;
+}
+
+
+
+#add-review-button {
+    color: #333;
+    display: inline-block;
+
+    &:hover,
+    &:visited {
+        color: #333;
+    }
+}
+
+#block-upsell-heading {
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #C2C2C2;
+
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+}
+.upsell-item-container {
+    width: 100%;
+}
+.upsell-product-item {
+    width: 100%;
+    margin: 0;
+
+    line-height: normal;
+    letter-spacing: normal;
+
+    .price-box {
+        margin-top: 8px;
+    }
+}
+.upsell-item-details {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    .upsell-item-info {
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-basis: 60%;
+    }
+    .upsell-item-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 39px;
+    }
+    .price-box {
+        .price-container {
+            .price-wrapper {
+                .price {
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 24px;
+                }
+            }
+        }
+    }
+}
+
+
+.view-product-button {
+    width: 110px;
+    height: 32px;
+    border-radius: 2px;
+
+    background-color: #333;
+
+    .flex-center();
+    a {
+        display: block;
+        padding: 6px 10px 7px;
+
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+    }
+}
+
+
+
+.block-title {
+    margin-bottom: 8px;
+}
+
+.product-item-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stock-amount-container {
+    display: flex;
+    gap: 6px;
+}
+#product-addtocart-button {
+    border: none;
+    background-color: #FF5501;
+}
+#related-addtocart-button {
+    #product-addtocart-button();
+    height: 52px;
+    width: 204px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.field.qty {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .qty-container {
+        height: 50px;
+        width: 186px;
+        border: 1px solid #C2C2C2;
+        border-radius: 2px;
+
+        display: flex;
+
+        #qty {
+            height: 100%;
+            width: 86px;
+            border: none;
+            border-right: 1px solid #C2C2C2;
+            border-left: 1px solid #C2C2C2;
+        }
+
+        .qty-button {
+            height: 100%;
+            width: 50px;
+            .flex-center();
+            cursor: pointer;
+        }
+
+        .increment {
+            color: #ff5501;
+            font-size: 32px;
+        }
+
+        .decrement {
+            color: #333333;
+            font-size: 32px;
+        }
+    }
+}
+
+.cart-amount-container {
+    .box-tocart {
+        margin-bottom: 25px;
+    }
+}
+
+.knockout-input {
+    display: flex;
+}

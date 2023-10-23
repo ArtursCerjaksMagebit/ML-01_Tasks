@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!--Remove unnecessary default blocks-->
+        <referenceBlock name="view.addto.compare" remove="true" />
+        <referenceBlock name="view.addto.wishlist" remove="true" />
+        <referenceBlock name="reviews.tab" remove="true" />
+        <referenceBlock name="product.reviews.wrapper" remove="true" />
+        <referenceBlock name="product.info.type" remove="true"/>
+
+        <!--Create new containers inside product.info.main that will hold some default blocks -->
+        <referenceContainer name="product.info.main">
+            <container name="product.info.descriptors" htmlTag="div" htmlClass="descriptor-container" after="product.info.price"/>
+            <container name="product.info.cart.amount" htmlTag="div" htmlClass="cart-amount-container" after="product.info.descriptors"/>
+        </referenceContainer>
+
+        <move element="product.info.overview" destination="product.info.descriptors"/>
+        <move element="product.attributes.exclude.pagebuilder" destination="product.info.descriptors"/>
+
+        <move element="product.info.addtocart" destination="product.info.cart.amount" after="-"/>
+
+        <!--Move one of the default blocks after one of the new containers-->
+        <move element="product.info.upsell" destination="product.info.main" after="product.info.cart.amount"/>
+    </body>
+</page>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="ViewModelExample\Block\ViewModel" name="view-model-example_view-model" template="ViewModelExample::helloworld.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">MageMastery\ViewModelExample\Block\ViewModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

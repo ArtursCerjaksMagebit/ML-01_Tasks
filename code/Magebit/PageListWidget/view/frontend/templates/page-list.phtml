@@ -1,0 +1,19 @@
+<?php
+/** @var \Magebit\PageListWidget\Model\PageList $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$title = $block->getData("title");
+$block->setPages();
+$selectedPages = $block->getData("selected_pages") ?? null;
+?>
+<div>
+  <nav>
+    <?php if(true): ?>
+    <h3><?= $escaper->escapeHtml($title) ?></h3>
+    <?php endif; ?>
+    <ul>
+      <?php foreach ($selectedPages as $page): ?>
+      <li><a href="/<?= $escaper->escapeHtml($page['value']) ?>"><?= $escaper->escapeHtml($page['label']) ?></a></li>
+      <?php endforeach; ?>
+    </ul>
+  </nav>
+</div>

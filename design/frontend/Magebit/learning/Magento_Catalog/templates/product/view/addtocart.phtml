@@ -1,0 +1,77 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()) :?>
+    <div class="box-tocart">
+        <div class="fieldset">
+            <?php if ($block->shouldRenderQuantity()) :?>
+                <div class="field qty">
+                    <div id="qty-container" class="qty-container" data-bind="scope: 'qty-counter'">
+                    <!--ko template: getTemplate() --><!-- /ko -->
+                        <script type="text/x-magento-init">
+                            {
+                                "#qty-container": {
+                                    "Magento_Ui/js/core/app": {
+                                        "components": {
+                                            "qty-counter": {
+                                                "component": "qty-counter",
+                                                "config": {
+                                                    "qty": <?php echo $block->getProductDefaultQty() * 1 ?>,
+                                                    "title": "Quantity",
+                                                    "dataValidate": <?php echo json_encode($block->getQuantityValidators()) ?>,
+                                                    "decreaseImage": <?php echo json_encode($block->getViewFileUrl('Magento_Catalog::images/minus-sign.svg')) ?>,
+                                                    "increaseImage": <?php echo json_encode($block->getViewFileUrl('Magento_Catalog::images/plus-sign.svg')) ?>
+                                                }
+                                            }
+                                         }
+                                    }
+                                }
+                            }
+                        </script>
+                    </div>
+                    <?php if ($block->displayProductStockStatus()) :?>
+                        <?php if ($_product->isAvailable()) :?>
+                            <div class="stock-amount-container" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+                                <div class="stock available">
+                                    <img src="<?= $block->getViewFileUrl('Magento_Catalog::images/check-mark.svg')?>" alt="check-mark">
+                                    <?= $block->escapeHtml(__('In stock')) ?>
+                                </div>
+                                <div>
+                                    <?= $_product->getData("quantity_and_stock_status/qty"); ?> items available
+                                </div>
+                            </div>
+
+                        <?php else :?>
+                            <div class="stock unavailable" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+                                <?= $block->escapeHtml(__('Out of stock')) ?>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+            <div class="actions">
+                <button type="submit"
+                        title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                        class="action primary tocart"
+                        id="product-addtocart-button">
+                    <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                </button>
+                <?= $block->getChildHtml('', true) ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>

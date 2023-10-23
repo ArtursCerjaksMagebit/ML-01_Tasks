@@ -1,0 +1,10 @@
+<?php
+use Magento\Framework\View\Element\Template;
+/** @var Template $block */
+$productViewModel = $block->getData('view_model');
+?>
+
+<h1><?= $escaper->escapeHtml(__('My First Template')); ?></h1>
+<p><?= $escaper->escapeHtml(__('With Layout support')) ?></p>
+<p><?= $escaper->escapeHtml($block->getData('custom_parameter')) ?></p>
+<p><?= $escaper->escapeHtml($productViewModel->sayHi()) ?></p>

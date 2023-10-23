@@ -1,0 +1,16 @@
+<div class="knockout-input">
+    <div class="qty-button decrement" data-bind="click: decreaseQty">
+        <img data-bind="attr: {'src': getDecreaseImage()}" alt="-">
+    </div>
+    <input type="number"
+           name="qty"
+           id="qty"
+           min="0"
+           data-bind="value: qty(), attr: {'title': getTitle()}"
+           class="input-text qty"
+    />
+    <div class="qty-button increment" data-bind="click: increaseQty">
+        <img data-bind="attr: {'src': getIncreaseImage()}" alt="+">
+    </div>
+</div>
+
