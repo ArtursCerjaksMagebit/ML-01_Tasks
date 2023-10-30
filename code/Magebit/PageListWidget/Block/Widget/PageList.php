@@ -16,7 +16,7 @@ class PageList extends Template implements BlockInterface
   /**
    * @var string $_template PageList block's template
    */
-  protected $_template = "page-list.phtml";
+    protected $_template = "page-list.phtml";
 
   /**
    * Injects source model for CMS pages dependency,
@@ -26,46 +26,41 @@ class PageList extends Template implements BlockInterface
    * @param CmsPageList $cmsPageList
    * @param array $data
    */
-  public function __construct(Template\Context $context, CmsPageList $cmsPageList, array $data = [])
-  {
-    parent::__construct($context, $data);
-    $this->cmsPageList = $cmsPageList;
-  }
+    public function __construct(Template\Context $context, CmsPageList $cmsPageList, array $data = [])
+    {
+        parent::__construct($context, $data);
+        $this->cmsPageList = $cmsPageList;
+    }
 
   /**
-   * Sets and normalizes CMS pages per admin selection
-   * for the template
+   * Gets selected CMS pages from admin panel
    *
-   * @return void
+   * @return array
    */
-  public function setPages(): void
-  {
-    if ($this->getData('display_mode') === 'all_pages') {
-      $this->setData('selected_pages', $this->cmsPageList->toOptionArray());
-    }
+    public function getSelectedPages(): array
+    {
+        if ($this->getData('display_mode') === 'all_pages') {
+            return $this->cmsPageList->toOptionArray();
+        } else {
+            $selectedPages = explode(',', $this->getData('selected_pages'));
+            $allPages = $this->cmsPageList->toOptionArray();
 
-    if ($this->getData('display_mode') === 'specific_pages') {
-      $selectedPages = explode(',',$this->getData('selected_pages'));
-      $allPages = $this->cmsPageList->toOptionArray();
+          //copies $allPages nested key values for use in array_search
+            $allPageValues = [];
+            $pageCount = count($allPages);
+            for ($i = 0; $i < $pageCount; $i++) {
+                $allPageValues[] = $allPages[$i]['value'];
+            }
 
-      //copies $allPages nested key values for use in array_search
-      $allPageValues = [];
-      for ($i = 0; $i < count($allPages); $i++) {
-        $allPageValues[] = $allPages[$i]['value'];
-      }
-
-      //uses array_search to find what pages' indices from $allPages are selected
-      $pages = [];
-      foreach ($selectedPages as $selectedPage) {
-        $key = array_search($selectedPage, $allPageValues);
-        if ($key !== false) {
-          $pages[] = $allPages[$key];
+          //uses array_search to find what pages' indices from $allPages are selected
+            $pages = [];
+            foreach ($selectedPages as $selectedPage) {
+                $key = array_search($selectedPage, $allPageValues);
+                if ($key !== false) {
+                    $pages[] = $allPages[$key];
+                }
+            }
+            return $pages;
         }
-      }
-
-      $this->setData('selected_pages', $pages);
     }
-
-  }
-
 }

@@ -4,6 +4,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     type: ComponentRegistrar::MODULE,
-    componentName: 'MageMastery_FirstLayout',
+    componentName: 'Magebit_JsonSerializer',
     path: __DIR__
 );

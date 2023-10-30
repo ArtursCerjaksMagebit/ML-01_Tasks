@@ -1,29 +1,26 @@
-<?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-?>
 <?php /* @var $block \Magento\Catalog\Block\Product\View\AbstractView */ ?>
 <?php /* @var \Magento\Framework\Escaper $escaper */ ?>
 
 <?php $_product = $block->getProduct(); ?>
 
-<?php if ($block->displayProductStockStatus()) :?>
-    <?php if ($_product->isAvailable()) :?>
-    <div class="stock-amount-container" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+<?php if ($block->displayProductStockStatus()):?>
+    <?php if ($_product->isAvailable()):?>
+    <div class="stock-amount-container" title="<?= $escaper->escapeHtmlAttr(__('Availability')) ?>">
         <div class="stock available">
-            <img src="<?= $block->getViewFileUrl('Magento_Catalog::images/check-mark.svg')?>" alt="check-mark">
-            <?= $block->escapeHtml(__('In stock')) ?>
+            <img
+                src="<?= $escaper->escapeHtmlAttr($block->getViewFileUrl('Magento_Catalog::images/check-mark.svg')); ?>"
+                alt="check-mark"
+            >
+            <?= $escaper->escapeHtml(__('In stock')) ?>
         </div>
         <div>
-            <?= $_product->getData("quantity_and_stock_status/qty"); ?> items available
+            <?= $escaper->escapeHtml($_product->getData("quantity_and_stock_status/qty")); ?> items available
         </div>
     </div>
 
-    <?php else :?>
-        <div class="stock unavailable" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
-            <?= $block->escapeHtml(__('Out of stock')) ?>
+    <?php else:?>
+        <div class="stock unavailable" title="<?= $escaper->escapeHtmlAttr(__('Availability')) ?>">
+            <?= $escaper->escapeHtml(__('Out of stock')) ?>
         </div>
     <?php endif; ?>
 <?php endif; ?>

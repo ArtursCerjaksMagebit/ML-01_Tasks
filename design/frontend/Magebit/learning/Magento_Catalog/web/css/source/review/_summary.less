@@ -1,11 +1,18 @@
+//
+//  Variables
+//  _____________________________________________
+
+@summary_primary__color: #ff5501;
+@summary_secondary__color: #333;
+
 .review-count {
     margin-left: calc(13px/2);
     margin-top: 5px;
     font-size: 12px;
-    color: #FF5501;
+    color: @summary_primary__color;
     &:hover,
     &:visited {
-        color: #FF5501;
+        color: @summary_primary__color;
         text-decoration: underline;
     }
 }
@@ -13,7 +20,7 @@
 .add-review-container {
     height: 26px;
     width: 115px;
-    border: 1px solid #333333;
+    border: 1px solid @summary_secondary__color;
     border-radius: 2px;
 
     display: flex;
@@ -26,7 +33,7 @@
     padding: 5px 10px;
     white-space: nowrap;
 
-    color: #333333;
+    color: @summary_secondary__color;
     font-size: 12px;
     font-weight: 600;
     text-align: center;

@@ -17,7 +17,13 @@
         <move element="product.info.overview" destination="product.info.descriptors"/>
         <move element="product.attributes.exclude.pagebuilder" destination="product.info.descriptors"/>
 
+        <!--Move addtocart template and add a json_serializer view model to it-->
         <move element="product.info.addtocart" destination="product.info.cart.amount" after="-"/>
+        <referenceBlock name="product.info.addtocart">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Magebit\JsonSerializer\ViewModel\JsonSerializer</argument>
+            </arguments>
+        </referenceBlock>
 
         <!--Move one of the default blocks after one of the new containers-->
         <move element="product.info.upsell" destination="product.info.main" after="product.info.cart.amount"/>
