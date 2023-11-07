@@ -4,11 +4,11 @@
         <add
             id="Magebit_Faq::home"
             title="FAQ"
-            module="Magento_Faq"
+            module="Magebit_Faq"
             sortOrder="1000"
-            parent="Magento_Catalog::catalog_categories"
-            resource="Magento_Catalog::categories"
-            action="magebit_faq/faq/index"
+            parent="Magento_Backend::content_elements"
+            resource="Magebit_Faq::faq"
+            action="magebit_faq/index/index"
         />
     </menu>
 </config>

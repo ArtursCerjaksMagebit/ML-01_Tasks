@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+
+    <widget class="Magebit\Faq\Block\Widget\Faq" id="magebit_faq">
+        <label>Frequently Asked Questions</label>
+        <description>Displays list of FAQs</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" sort_order="0" required="false" visible="true">
+                <label>Title</label>
+                <description>
+                    <![CDATA[
+                    Title of FAQ section. Default:<br />
+                    Frequently Asked Questions
+                    ]]>
+                </description>
+                <value>Frequently Asked Questions</value>
+            </parameter>
+            <parameter name="status" xsi:type="text" sort_order="1" required="false" visible="true">
+                <label>Status of questions</label>
+                <description>
+                    <![CDATA[
+                    Choose what status questions to display. By default, there are only 2 options: <br />
+                    0 - inactive; <br />
+                    1 - active (default); <br />
+                    But you can assign different numbers to questions and then create different instances of this widget. <br />
+                    For example: <br />
+                    2 - active questions about return policy; <br />
+                    3 - active questions about the upcoming Black Friday sale; <br />
+                    And then place instances of this widget in different pages with that number as this option's value.
+                    ]]>
+                </description>
+                <value>1</value>
+            </parameter>
+        </parameters>
+    </widget>
+
+</widgets>

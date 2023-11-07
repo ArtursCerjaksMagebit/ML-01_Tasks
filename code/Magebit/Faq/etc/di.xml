@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Magebit\Faq\Api\FaqRepositoryInterface"
+                type="Magebit\Faq\Model\FaqRepository"/>
+    <preference for="Magebit\Faq\Api\Data\FaqModelInterface"
+                type="Magebit\Faq\Model\FaqModel"/>
+    <preference for="Magebit\Faq\Api\FaqManagementInterface"
+                type="Magebit\Faq\Model\FaqManagement"/>
+    <preference for="Magebit\Faq\Api\Data\FaqSearchResultsInterface"
+                type="Magento\Framework\Api\Search\SearchResult"/>
+
+    <virtualType name="MagebitFaqListingFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MagebitFaqListingDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magebit\Faq\Model\ResourceModel\Faq\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MagebitFaqListingFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="magebit_faq_faq_collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magebit_faq</argument>
+            <argument name="resourceModel" xsi:type="string">Magebit\Faq\Model\ResourceModel\FaqResourceModel</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="magebit_faq_faq_listing_data_source" xsi:type="string">magebit_faq_faq_collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

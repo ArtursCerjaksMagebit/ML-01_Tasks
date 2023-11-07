@@ -2,21 +2,19 @@
 
 namespace Magebit\Faq\Model\ResourceModel\Faq;
 
-use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magebit\Faq\Model\FaqModel;
+use Magebit\Faq\Model\ResourceModel\FaqResourceModel;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
-/**
- * Resource model for Faq entity
- */
-
-class Collection extends AbstractDb
+class Collection extends AbstractCollection
 {
     /**
-     * Links ResourceModel with corresponding db table on primary key
+     * Initializes collection
      *
      * @return void
      */
     protected function _construct(): void
     {
-        $this->_init('magebit_faq', 'id');
+        $this->_init(FaqModel::class, FaqResourceModel::class);
     }
 }

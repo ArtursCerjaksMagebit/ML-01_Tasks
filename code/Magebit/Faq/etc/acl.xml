@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magebit_Faq::faq" title="Magebit FAQ" translate="title">
+                <resource id="Magebit_Faq::faq_manage" title="Manage FAQs" translate="title">
+                    <resource id="Magebit_Faq::faq_create" title="Create New FAQ" translate="title"/>
+                    <resource id="Magebit_Faq::faq_edit" title="Edit FAQ" translate="title"/>
+                    <resource id="Magebit_Faq::faq_delete" title="Delete FAQ" translate="title"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

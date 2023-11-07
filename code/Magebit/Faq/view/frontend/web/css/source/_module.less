@@ -1,0 +1,38 @@
+@faq-question-background: #f0f0f0;
+
+.faq-container {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+
+    .faq-title {
+        margin: 10px;
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: normal;
+    }
+
+    .faq-item {
+        width: 100%;
+
+        .faq-question-container {
+            width: 100%;
+            background-color: @faq-question-background;
+            display: flex;
+            align-items: center;
+
+            .faq-question {
+                margin: 8px 10px;
+                font-size: 16px;
+                line-height: 24px;
+                font-weight: normal;
+            }
+        }
+
+        .faq-answer  {
+            margin: 12px 10px;
+            font-size: 12px;
+            line-height: 18px;
+        }
+    }
+}
