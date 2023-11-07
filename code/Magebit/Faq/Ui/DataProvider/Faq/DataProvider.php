@@ -8,10 +8,10 @@ use Magebit\Faq\Model\ResourceModel\Faq\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProviderInterface;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
-use Magento\Ui\DataProvider\ModifierPoolDataProvider;
+use Magento\Ui\DataProvider\AbstractDataProvider;
 
 
-class DataProvider extends ModifierPoolDataProvider implements DataProviderInterface
+class DataProvider extends AbstractDataProvider implements DataProviderInterface
 {
     /** @var Collection */
     protected $collection;
@@ -72,6 +72,7 @@ class DataProvider extends ModifierPoolDataProvider implements DataProviderInter
             $this->loadedData[$faq->getId()] = $faq->getData();
             $this->dataPersistor->clear('magebit_faq');
         }
+
         return $this->loadedData;
     }
 }

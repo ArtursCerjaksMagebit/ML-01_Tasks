@@ -26,7 +26,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Magebit_Faq::faq_manage</aclResource>
-        <dataProvider class="Magebit\Faq\Ui\DataProvider\Faq\DataProvider" name="magebit_faq_faq_listing_data_source">
+        <dataProvider class="Magebit\Faq\Model\ResourceModel\Grid\Grid\Collection" name="magebit_faq_faq_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
