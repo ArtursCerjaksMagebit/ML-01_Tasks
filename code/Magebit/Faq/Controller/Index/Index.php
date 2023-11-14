@@ -2,35 +2,31 @@
 
 namespace Magebit\Faq\Controller\Index;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\App\ActionInterface;
+use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 
 /** Displays page of FAQs for frontend */
-class Index extends Action implements HttpGetActionInterface
+class Index implements ActionInterface
 {
     /**
      * Injects dependencies (page factory)
      *
-     * @param Context $context
      * @param PageFactory $pageFactory
      */
     public function __construct(
-        Context $context,
         private readonly PageFactory $pageFactory
     ) {
-        parent::__construct($context);
+
     }
 
     /**
      * Returns page
      *
-     * @return ResultInterface
+     * @return Page
      */
-    public function execute(): ResultInterface
+    public function execute(): Page
     {
         return $this->pageFactory->create();
     }

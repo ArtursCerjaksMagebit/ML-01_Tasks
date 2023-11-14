@@ -8,12 +8,12 @@ $activeFaqs = $block->getFaqsByStatus((int)$block->getData('status'));
         <h3 class="faq-title"><?= $escaper->escapeHtml($block->getTitle()) ?></h3>
         <?php foreach ($activeFaqs as $faq): ?>
             <div class="faq-item">
-                <div class="faq-question-container">
+                <div class="faq-question-container" data-role="collapsible">
                     <h4 class="faq-question">
                         <?= $escaper->escapeHtml($faq->getQuestion()) ?>
                     </h4>
                 </div>
-                <p class="faq-answer"><?= $escaper->escapeHtml($faq->getAnswer()) ?></p>
+                <p class="faq-answer" data-role="content"><?= $escaper->escapeHtml($faq->getAnswer()) ?></p>
             </div>
         <?php endforeach; ?>
     </div>
@@ -21,13 +21,26 @@ $activeFaqs = $block->getFaqsByStatus((int)$block->getData('status'));
     <div class="faq-container">
         <h3 class="faq-title">FAQ Widget Goes Here</h3>
         <div class="faq-item">
-            <div class="faq-question-container">
+            <div class="faq-question-container" data-role="collapsible">
                 <h4 class="faq-question">Is this how a question would look like?</h4>
             </div>
-            <p class="faq-answer">
+            <p class="faq-answer" data-role="content">
                 Yes, right above is an example of how a question would look like. This is an example of an answer.
                 This text is shown because there are no FAQs with this widget's "Status of questions" option value.
             </p>
         </div>
     </div>
 <?php endif; ?>
+<script defer>
+    require([
+        'jquery',
+        'accordion'
+    ], function($) {
+        $(".faq-container").accordion({
+            multipleCollapsible: true,
+            active: "",
+            openedState: "active",
+            collapsible: true
+        });
+    });
+</script>

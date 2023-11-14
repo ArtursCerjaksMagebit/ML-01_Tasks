@@ -23,8 +23,8 @@
 21. ~~Configure ui component to include search, actions, pagination, filters etc.;~~
 22. ~~Configure class constructors to use interfaces where available;~~
 23. ~~Configure di.xml to specify which classes to use in constructors~~
-24. Create frontend route for FAQs; (Followed tutorial and triple checked. What is wrong???)
-25. Make frontend template use in-built accordion "widget";
+24. ~~Create frontend route for FAQs;~~
+25. ~~Make frontend template use in-built accordion "widget";~~
 26. ~~Make frontend template sort by position;~~
 27. ~~Comment all functions and classes;~~
 28. ~~Make filters & search work;~~
