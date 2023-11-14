@@ -7,8 +7,12 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
+/** Actions for FAQ grid/listing */
 class FaqActions extends Column
 {
+    const URL_PATH_EDIT = 'magebit_faq/faq/edit';
+    const URL_PATH_DELETE = 'magebit_faq/faq/delete';
+
     /**
      * Inject deps (UrlInterface)
      *
@@ -18,7 +22,7 @@ class FaqActions extends Column
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
-        private readonly UrlInterface $urlBuilder,
+        protected UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
     )
@@ -30,10 +34,6 @@ class FaqActions extends Column
         $data);
     }
 
-
-    //TODO: Place all actionsColumn actions here
-    //TODO: Verify whether path works
-    //TODO: If paths work, remove urlBuilder dep and constructor
     /**
      * Prepare data source
      *
@@ -44,25 +44,37 @@ class FaqActions extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
+                if (isset($item['id'])) {
+                    $faqTitle = $item['question'];
                     $item[$this->getData('name')] = [
                         'delete' => [
-                            'href' => '/delete',
-                            'label' => __('Delete')
+                            'href' => $this->urlBuilder->getUrl(
+                                self::URL_PATH_DELETE,
+                                [
+                                    'id' => $item['id']
+                                ]
+                            ),
+                            'label' => __('Delete'),
+                            'confirm' => [
+                                'title' => __('Delete FAQ: %1', $faqTitle),
+                                'message' => __('Are you sure you want to delete %1', $faqTitle)
+                            ],
+                            'post' => true
+                        ],
+                        'edit' => [
+                            'href' => $this->urlBuilder->getUrl(
+                                self::URL_PATH_EDIT,
+                                [
+                                    'id' => $item['id']
+                                ]
+                            ),
+                            'label' => __('Edit'),
+
                         ]
                     ];
                 }
             }
-
+        }
         return $dataSource;
     }
 }
-
-//
-//['edit'] = [
-//    'href' => $this->urlBuilder->getUrl(
-//        'magebit_faq/*/edit',
-//        ['id' => $item['entity_id'], 'store' => $storeId]
-//    ),
-//    'label' => __('Edit'),
-//    'hidden' => false
-//];

@@ -3,6 +3,7 @@
 namespace Magebit\Faq\Model;
 
 use Exception;
+use Magebit\Faq\Api\Data\FaqModelInterface;
 use Magebit\Faq\Api\FaqRepositoryInterface;
 use Magebit\Faq\Model\ResourceModel\FaqResourceModel;
 use Magebit\Faq\Model\ResourceModel\Faq\CollectionFactory as FaqCollectionFactory;
@@ -23,8 +24,8 @@ class FaqRepository implements FaqRepositoryInterface
      * @param FaqCollectionFactory $faqCollectionFactory
      */
     public function __construct(
-        protected FaqModel    $faq,
-        protected FaqResourceModel     $faqResourceModel,
+        protected FaqModelInterface $faq,
+        protected FaqResourceModel $faqResourceModel,
         protected FaqCollectionFactory $faqCollectionFactory,
     )
     {}
@@ -32,10 +33,10 @@ class FaqRepository implements FaqRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function get(int $faqId): FaqModel
+    public function get(int|string $faqId): FaqModelInterface
     {
         $faq = $this->faq;
-        $this->faqResourceModel->load($faq, $faqId);
+        $this->faqResourceModel->load($faq, (int)$faqId);
         if (!$faq->getId()) {
             throw new NoSuchEntityException(__('Entity with such id does not exist: ', $faqId));
         }
@@ -45,7 +46,7 @@ class FaqRepository implements FaqRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getList()
+    public function getList(): array
     {
         return $this->faqCollectionFactory->create()->getItems();
     }
@@ -53,7 +54,7 @@ class FaqRepository implements FaqRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function save(FaqModel $faq): FaqModel
+    public function save(FaqModelInterface $faq): FaqModelInterface
     {
         try {
             $this->faqResourceModel->save($faq);
@@ -66,7 +67,7 @@ class FaqRepository implements FaqRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function delete(FaqModel $faq): bool
+    public function delete(FaqModelInterface $faq): bool
     {
         try {
             $this->faqResourceModel->delete($faq);

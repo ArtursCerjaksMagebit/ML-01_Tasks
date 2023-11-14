@@ -2,9 +2,10 @@
 
 namespace Magebit\Faq\Controller\Adminhtml\Faq;
 
+use Magebit\Faq\Api\FaqManagementInterface;
+use Magebit\Faq\Api\FaqRepositoryInterface;
 use Magebit\Faq\Model\ResourceModel\Faq\Collection;
 use Magebit\Faq\Model\ResourceModel\Faq\CollectionFactory;
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Eav\Model\Entity\Collection\AbstractCollection;
@@ -13,29 +14,31 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Ui\Component\MassAction\Filter;
 
-abstract class AbstractMassAction extends Action
+/** Contains protected functions for mass actions to inherit from */
+abstract class AbstractMassAction extends AbstractAction
 {
-    /**
-     * Authorization level of a basic admin session
-     */
-    const ADMIN_RESOURCE = 'Magebit_Faq::faq_manage';
+
 
     protected string $redirectUrl = '*/*/index';
 
     /**
-     * Inject dependencies
+     * Inject dependencies (CollectionFactory, FaqManagementInterface)
      *
-     * @param Context $context
-     * @param Filter $filter
-     * @param CollectionFactory $collectionFactory
+     * @inheritDoc
      */
     public function __construct(
         Context $context,
         protected Filter $filter,
-        protected CollectionFactory $collectionFactory
+        protected CollectionFactory $collectionFactory,
+        protected FaqManagementInterface $faqManagement,
+        protected FaqRepositoryInterface $faqRepository
     )
     {
-        parent::__construct($context);
+        parent::__construct(
+            $context,
+            $filter,
+            $faqRepository
+        );
     }
 
     /**
@@ -64,7 +67,7 @@ abstract class AbstractMassAction extends Action
      */
     protected function getComponentRefererUrl(): string
     {
-        return $this->filter->getComponentRefererUrl()?: 'magebit_faq/*/index';
+        return $this->filter->getComponentRefererUrl()?: $this->redirectUrl;
     }
 
     /**
@@ -74,4 +77,17 @@ abstract class AbstractMassAction extends Action
      * @return ResponseInterface|ResultInterface
      */
     abstract protected function massAction(AbstractCollection|Collection $collection);
+
+    /**
+     * Generate redirect back to grid
+     *
+     * @return ResponseInterface|ResultInterface
+     */
+    protected function generateRedirect(): ResponseInterface|ResultInterface
+    {
+        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        $resultRedirect->setPath($this->getComponentRefererUrl());
+
+        return $resultRedirect;
+    }
 }

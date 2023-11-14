@@ -4,6 +4,7 @@ namespace Magebit\Faq\Model;
 
 use Magebit\Faq\Api\Data\FaqModelInterface;
 use Magebit\Faq\Model\ResourceModel\FaqResourceModel;
+use Magento\Framework\Api\AttributeValue;
 use Magento\Framework\Model\AbstractModel;
 
 /**
@@ -18,6 +19,14 @@ class FaqModel extends AbstractModel implements FaqModelInterface
     const KEY_STATUS = 'status';
     const KEY_POSITION = 'position';
     const KEY_UPDATED_AT = 'updated_at';
+    const ATTRIBUTES = [
+        self::KEY_ID,
+        self::KEY_QUESTION,
+        self::KEY_ANSWER,
+        self::KEY_STATUS,
+        self::KEY_POSITION,
+        self::KEY_UPDATED_AT,
+    ];
 
     /**
      * Links model to resourceModel
@@ -94,9 +103,9 @@ class FaqModel extends AbstractModel implements FaqModelInterface
     /**
      * Get faq status
      *
-     * @return int 0 = inactive, 1 = active
+     * @return string 0 = inactive, 1 = active
      */
-    public function getStatus(): int
+    public function getStatus(): string
     {
         return $this->_getData(self::KEY_STATUS);
     }
@@ -104,21 +113,21 @@ class FaqModel extends AbstractModel implements FaqModelInterface
     /**
      * Set faq status
      *
-     * @param int $status 0 = inactive, 1 = active
+     * @param int|string $status 0 = inactive, 1 = active
      * @return $this
      */
-    public function setStatus(int $status): FaqModelInterface
+    public function setStatus(int|string $status): FaqModelInterface
     {
-        $this->setData(self::KEY_STATUS, $status);
+        $this->setData(self::KEY_STATUS, (string)$status);
         return $this;
     }
 
     /**
      * Get faq position
      *
-     * @return int|null
+     * @return string
      */
-    public function getPosition(): int|null
+    public function getPosition(): string
     {
         return $this->_getData(self::KEY_POSITION);
     }
@@ -143,5 +152,23 @@ class FaqModel extends AbstractModel implements FaqModelInterface
     public function getUpdatedAt(): string|null
     {
         return $this->_getData(self::KEY_UPDATED_AT);
+    }
+
+    /**
+     * Retrieve custom attributes
+     *
+     * @return AttributeValue[]
+     */
+    public function getCustomAttributes(): array
+    {
+        $attributes = [];
+        foreach(self::ATTRIBUTES as $attribute) {
+            $attributes[] = new AttributeValue([
+                'attribute_code' => $attribute,
+                'value' => $this->_getData($attribute)
+            ]);
+        }
+
+        return $attributes;
     }
 }

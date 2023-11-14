@@ -8,7 +8,6 @@ use Magebit\Faq\Model\FaqModel;
 /**
  * Resource model for Faq entity
  */
-
 class FaqResourceModel extends AbstractDb
 {
     /**

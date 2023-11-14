@@ -1,6 +1,6 @@
 <?php
 
-namespace Magebit\Faq\Controller\Adminhtml\Index;
+namespace Magebit\Faq\Controller\Adminhtml\Faq;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -9,10 +9,9 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
+/** Handles displaying grid/listing for FAQs */
 class Index extends Action
 {
-    private $pageFactory;
-
     /**
      * Injects dependencies
      *
@@ -21,10 +20,8 @@ class Index extends Action
      */
     public function __construct(
         Context $context,
-        PageFactory $pageFactory
+        private readonly PageFactory $pageFactory
     ) {
-        $this->pageFactory = $pageFactory;
-
         parent::__construct($context);
     }
 

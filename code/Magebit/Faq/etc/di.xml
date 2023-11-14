@@ -7,36 +7,20 @@
                 type="Magebit\Faq\Model\FaqModel"/>
     <preference for="Magebit\Faq\Api\FaqManagementInterface"
                 type="Magebit\Faq\Model\FaqManagement"/>
-    <preference for="Magebit\Faq\Api\Data\FaqSearchResultsInterface"
+    <preference for="Magebit\Faq\Api\Data\FaqSearchResultInterface"
                 type="Magento\Framework\Api\Search\SearchResult"/>
 
-<!--    <virtualType name="MagebitFaqListingFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">-->
+<!--    <virtualType name="Magebit\Faq\Model\ResourceModel\Faq\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">-->
 <!--        <arguments>-->
-<!--            <argument name="appliers" xsi:type="array">-->
-<!--                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>-->
-<!--                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>-->
-<!--            </argument>-->
+<!--            <argument name="mainTable" xsi:type="string">magebit_faq</argument>-->
+<!--            <argument name="resourceModel" xsi:type="string">Magebit\Faq\Model\ResourceModel\FaqResourceModel</argument>-->
 <!--        </arguments>-->
 <!--    </virtualType>-->
-
-<!--    <virtualType name="MagebitFaqListingDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">-->
-<!--        <arguments>-->
-<!--            <argument name="collection" xsi:type="object" shared="false">Magebit\Faq\Model\ResourceModel\Faq\Collection</argument>-->
-<!--            <argument name="filterPool" xsi:type="object" shared="false">MagebitFaqListingFilterPool</argument>-->
-<!--        </arguments>-->
-<!--    </virtualType>-->
-
-    <virtualType name="Magebit\Faq\Model\ResourceModel\Grid\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
-        <arguments>
-            <argument name="mainTable" xsi:type="string">magebit_faq</argument>
-            <argument name="resourceModel" xsi:type="string">Magebit\Faq\Model\ResourceModel\FaqResourceModel</argument>
-        </arguments>
-    </virtualType>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="magebit_faq_faq_listing_data_source" xsi:type="string">Magebit\Faq\Model\ResourceModel\Grid\Grid\Collection</item>
+                <item name="magebit_faq_faq_listing_data_source" xsi:type="string">Magebit\Faq\Model\ResourceModel\Faq\Collection</item>
             </argument>
         </arguments>
     </type>

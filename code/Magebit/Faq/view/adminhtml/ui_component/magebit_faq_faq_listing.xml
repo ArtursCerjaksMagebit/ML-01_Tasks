@@ -6,19 +6,24 @@
         </item>
     </argument>
     <settings>
-<!--        <buttons>-->
-<!--            <button name="add">-->
-<!--                <url path="*/*/new"/>-->
-<!--                <class>primary</class>-->
-<!--                <label translate="true">Add New Question</label>-->
-<!--            </button>-->
-<!--        </buttons>-->
+        <buttons>
+            <button name="add">
+                <url path="*/*/edit"/>
+                <class>primary</class>
+                <label translate="true">Add New Question</label>
+            </button>
+        </buttons>
         <spinner>magebit_faq_faq_columns</spinner>
         <deps>
             <dep>magebit_faq_faq_listing.magebit_faq_faq_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="magebit_faq_faq_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="magebit_faq_faq_listing_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">id</param>
@@ -26,7 +31,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Magebit_Faq::faq_manage</aclResource>
-        <dataProvider class="Magebit\Faq\Model\ResourceModel\Grid\Grid\Collection" name="magebit_faq_faq_listing_data_source">
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="magebit_faq_faq_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
@@ -34,88 +39,115 @@
         </dataProvider>
     </dataSource>
     <listingToolbar name="listing_top">
-<!--        <settings>-->
-<!--            <sticky>true</sticky>-->
-<!--        </settings>-->
-<!--        <bookmark name="bookmarks"/>-->
-<!--        <columnsControls name="columns_controls"/>-->
-<!--        <filterSearch name="fulltext" />-->
-<!--        <filters name="listing_filters" component="Magento_Ui/js/form/element/ui-select" />-->
-<!--        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">-->
-<!--            <action name="delete">-->
-<!--                <settings>-->
-<!--                    <confirm>-->
-<!--                        <message translate="true">Are you sure you want to delete the selected questions?</message>-->
-<!--                        <title translate="true">Delete items</title>-->
-<!--                    </confirm>-->
-<!--                    <url path="magebit_faq/faq/massDelete"/>-->
-<!--                    <type>delete</type>-->
-<!--                    <label translate="true">Delete</label>-->
-<!--                </settings>-->
-<!--            </action>-->
-<!--            <action name="enable">-->
-<!--                <settings>-->
-<!--                    <confirm>-->
-<!--                        <message translate="true">Are you sure you want to enable the selected questions? (overwrites status to 1)</message>-->
-<!--                        <title translate="true">Enable items</title>-->
-<!--                    </confirm>-->
-<!--                    <url path="magebit_faq/faq/massEnable"/>-->
-<!--                    <type>enable</type>-->
-<!--                    <label translate="true">Enable</label>-->
-<!--                </settings>-->
-<!--            </action>-->
-<!--            <action name="disable">-->
-<!--                <settings>-->
-<!--                    <confirm>-->
-<!--                        <message translate="true">Are you sure you want to disable the selected questions? (overwrites status to 0)</message>-->
-<!--                        <title translate="true">Disable items</title>-->
-<!--                    </confirm>-->
-<!--                    <url path="magebit_faq/faq/massDisable"/>-->
-<!--                    <type>disable</type>-->
-<!--                    <label translate="true">Disable</label>-->
-<!--                </settings>-->
-<!--            </action>-->
-<!--            <action name="edit">-->
-<!--                <settings>-->
-<!--                    <callback>-->
-<!--                        <target>editSelected</target>-->
-<!--                        <provider>-->
-<!--                            magebit_faq_faq_listing.magebit_faq_faq_listing.magebit_faq_faq_columns_editor-->
-<!--                        </provider>-->
-<!--                    </callback>-->
-<!--                    <type>edit</type>-->
-<!--                    <label translate="true">Edit</label>-->
-<!--                </settings>-->
-<!--            </action>-->
-<!--        </massaction>-->
-<!--        <paging name="listing_paging"/>-->
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext" />
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+            <filterSelect name="store_id" provider="${ $.parentName }">
+                <settings>
+                    <captionValue>0</captionValue>
+                    <options class="Magento\Cms\Ui\Component\Listing\Column\Cms\Options" />
+                    <label translate="true">Store View</label>
+                    <dataScope>store_id</dataScope>
+                    <imports>
+                        <link name="visible">ns = ${ $.ns }, index = ${ $.index }:visible</link>
+                    </imports>
+                </settings>
+            </filterSelect>
+        </filters>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete the selected questions?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="magebit_faq/faq/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="enable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to enable the selected questions? (overwrites status to 1)</message>
+                        <title translate="true">Enable items</title>
+                    </confirm>
+                    <url path="magebit_faq/faq/massEnable"/>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to disable the selected questions? (overwrites status to 0)</message>
+                        <title translate="true">Disable items</title>
+                    </confirm>
+                    <url path="magebit_faq/faq/massDisable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+            <action name="edit">
+                <settings>
+                    <callback>
+                        <target>editSelected</target>
+                        <provider>
+                            magebit_faq_faq_listing.magebit_faq_faq_listing.magebit_faq_faq_columns_editor
+                        </provider>
+                    </callback>
+                    <type>edit</type>
+                    <label translate="true">Edit</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="magebit_faq_faq_columns" class="Magebit\Faq\Ui\Component\Listing\Columns">
-<!--        <settings>-->
-<!--            <editorConfig>-->
-<!--                <param name="clientConfig" xsi:type="array">-->
-<!--                    <item name="saveUrl" xsi:type="url" path="magebit_faq/faq/inlineEdit"/>-->
-<!--                    <item name="validateBeforeSave" xsi:type="boolean">false</item>-->
-<!--                </param>-->
-<!--                <param name="indexField" xsi:type="string">id</param>-->
-<!--                <param name="enabled" xsi:type="boolean">true</param>-->
-<!--                <param name="selectProvider" xsi:type="string">-->
-<!--                    magebit_faq_faq_listing.magebit_faq_faq_listing.magebit_faq_faq_columns.ids-->
-<!--                </param>-->
-<!--            </editorConfig>-->
-<!--            <childDefaults>-->
-<!--                <param name="fieldAction" xsi:type="array">-->
-<!--                    <item name="provider" xsi:type="string">-->
-<!--                        magebit_faq_faq_listing.magebit_faq_faq_listing.magebit_faq_faq_columns_editor-->
-<!--                    </item>-->
-<!--                    <item name="target" xsi:type="string">startEdit</item>-->
-<!--                    <item name="params" xsi:type="array">-->
-<!--                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>-->
-<!--                        <item name="1" xsi:type="boolean">true</item>-->
-<!--                    </item>-->
-<!--                </param>-->
-<!--            </childDefaults>-->
-<!--        </settings>-->
+    <columns name="magebit_faq_faq_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="magebit_faq/faq/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">
+                    magebit_faq_faq_listing.magebit_faq_faq_listing.magebit_faq_faq_columns.ids
+                </param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">
+                        magebit_faq_faq_listing.magebit_faq_faq_listing.magebit_faq_faq_columns_editor
+                    </item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
         <selectionsColumn name="ids" sortOrder="0">
             <settings>
                 <indexField>id</indexField>
@@ -134,6 +166,9 @@
         <column name="question" sortOrder="2">
             <settings>
                 <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
                 <dataType>text</dataType>
                 <label translate="true">Question</label>
             </settings>
@@ -163,6 +198,9 @@
                 <dataType>date</dataType>
                 <dateFormat>yyyy-MM-dd hh:mm:ss</dateFormat>
                 <label translate="true">Last Modified</label>
+                <editor>
+                    <editorType>date</editorType>
+                </editor>
                 <timezone>false</timezone>
             </settings>
         </column>

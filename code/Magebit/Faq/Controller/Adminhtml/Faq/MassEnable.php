@@ -2,36 +2,22 @@
 
 namespace Magebit\Faq\Controller\Adminhtml\Faq;
 
-use Magebit\Faq\Model\FaqManagement;
 use Magebit\Faq\Model\ResourceModel\Faq\Collection;
-use Magebit\Faq\Model\ResourceModel\Faq\CollectionFactory;
-use Magento\Backend\App\Action\Context;
 use Magento\Eav\Model\Entity\Collection\AbstractCollection;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Ui\Component\MassAction\Filter;
+use Magento\Framework\Controller\ResultInterface;
 
+/**
+ * Enables FAQs from selection in admin grid
+ */
 class MassEnable extends AbstractMassAction implements HttpPostActionInterface
 {
     /**
-     * Inject dependencies (FaqManagement)
-     *
      * @inheritDoc
      */
-    public function __construct(
-        Context $context,
-        Filter $filter,
-        CollectionFactory $collectionFactory,
-        private readonly FaqManagement $faqManagement
-    )
-    {
-        parent::__construct($context, $filter, $collectionFactory);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function massAction(AbstractCollection|Collection $collection)
+    protected function massAction(AbstractCollection|Collection $collection): ResponseInterface|ResultInterface
     {
         $questionsEnabled = 0;
         foreach($collection->getAllIds() as $questionId) {
@@ -43,9 +29,6 @@ class MassEnable extends AbstractMassAction implements HttpPostActionInterface
             $this->messageManager->addSuccessMessage(__('A total of %1 record(s) were enabled.', $questionsEnabled));
         }
 
-        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-        $resultRedirect->setPath($this->getComponentRefererUrl());
-
-        return $resultRedirect;
+        return $this->generateRedirect();
     }
 }

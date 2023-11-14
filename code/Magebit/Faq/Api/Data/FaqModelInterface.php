@@ -2,6 +2,9 @@
 
 namespace Magebit\Faq\Api\Data;
 
+use Magento\Framework\Api\AttributeValue;
+
+/** @api for FaqModel class */
 interface FaqModelInterface
 {
     const MAIN_TABLE_NAME = 'magebit_faq';
@@ -62,9 +65,9 @@ interface FaqModelInterface
     /**
      * Get faq status
      *
-     * @return int 0 = inactive, 1 = active
+     * @return string 0 = inactive, 1 = active
      */
-    public function getStatus(): int;
+    public function getStatus(): string;
 
     /**
      * Set faq status
@@ -77,9 +80,9 @@ interface FaqModelInterface
     /**
      * Get faq position
      *
-     * @return int|null
+     * @return string
      */
-    public function getPosition(): int|null;
+    public function getPosition(): string;
 
     /**
      * Set faq position
@@ -95,4 +98,11 @@ interface FaqModelInterface
      * @return string|null
      */
     public function getUpdatedAt(): string|null;
+
+    /**
+     * Retrieve custom attributes
+     *
+     * @return AttributeValue[]
+     */
+    public function getCustomAttributes(): array;
 }

@@ -1,10 +1,14 @@
 <?php
 namespace Magebit\Faq\Ui\DataProvider\Faq\Listing;
 
+use Magebit\Faq\Api\Data\FaqModelInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult;
 
+/** Collection for FAQ listing */
 class Collection extends SearchResult
 {
+    protected $_mainTable = FaqModelInterface::MAIN_TABLE_NAME;
+
     /**
      * Init select
      *
@@ -12,7 +16,7 @@ class Collection extends SearchResult
      */
     protected function _initSelect(): Collection
     {
-      parent::_initSelect();
-      return $this;
+        parent::_initSelect();
+        return $this;
     }
 }
