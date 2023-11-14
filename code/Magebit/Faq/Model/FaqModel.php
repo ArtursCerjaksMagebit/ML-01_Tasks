@@ -12,14 +12,14 @@ use Magento\Framework\Model\AbstractModel;
  */
 class FaqModel extends AbstractModel implements FaqModelInterface
 {
-    const MAIN_TABLE_NAME = 'magebit_faq';
-    const KEY_ID = 'id';
-    const KEY_QUESTION = 'question';
-    const KEY_ANSWER = 'answer';
-    const KEY_STATUS = 'status';
-    const KEY_POSITION = 'position';
-    const KEY_UPDATED_AT = 'updated_at';
-    const ATTRIBUTES = [
+    public const MAIN_TABLE_NAME = 'magebit_faq';
+    public const KEY_ID = 'id';
+    public const KEY_QUESTION = 'question';
+    public const KEY_ANSWER = 'answer';
+    public const KEY_STATUS = 'status';
+    public const KEY_POSITION = 'position';
+    public const KEY_UPDATED_AT = 'updated_at';
+    public const ATTRIBUTES = [
         self::KEY_ID,
         self::KEY_QUESTION,
         self::KEY_ANSWER,
@@ -51,10 +51,12 @@ class FaqModel extends AbstractModel implements FaqModelInterface
     /**
      * Does not work, let DB handle IDs
      *
-     * @param $value
+     * @param string|int $value
      * @return void
      */
-    public function setId($value) {}
+    public function setId($value)
+    {
+    }
 
     /**
      * Get faq question
@@ -162,7 +164,7 @@ class FaqModel extends AbstractModel implements FaqModelInterface
     public function getCustomAttributes(): array
     {
         $attributes = [];
-        foreach(self::ATTRIBUTES as $attribute) {
+        foreach (self::ATTRIBUTES as $attribute) {
             $attributes[] = new AttributeValue([
                 'attribute_code' => $attribute,
                 'value' => $this->_getData($attribute)

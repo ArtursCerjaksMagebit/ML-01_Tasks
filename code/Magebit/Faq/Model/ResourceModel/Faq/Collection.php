@@ -34,8 +34,7 @@ class Collection extends SearchResult implements SearchResultInterface
         $resourceModel = FaqResourceModel::class,
         $identifierName = null,
         $connectionName = null
-    )
-    {
+    ) {
         parent::__construct(
             $entityFactory,
             $logger,

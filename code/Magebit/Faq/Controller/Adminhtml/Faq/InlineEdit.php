@@ -21,15 +21,13 @@ class InlineEdit extends AbstractAction
         Filter $filter,
         FaqRepositoryInterface $faqRepository,
         protected JsonFactory $resultJsonFactory,
-    )
-    {
+    ) {
         parent::__construct(
             $context,
             $filter,
             $faqRepository
         );
     }
-
 
     /**
      * Lets user inline edit questions from grid

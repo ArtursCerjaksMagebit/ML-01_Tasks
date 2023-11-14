@@ -10,8 +10,8 @@ use Magento\Ui\Component\Listing\Columns\Column;
 /** Actions for FAQ grid/listing */
 class FaqActions extends Column
 {
-    const URL_PATH_EDIT = 'magebit_faq/faq/edit';
-    const URL_PATH_DELETE = 'magebit_faq/faq/delete';
+    protected const URL_PATH_EDIT = 'magebit_faq/faq/edit';
+    protected const URL_PATH_DELETE = 'magebit_faq/faq/delete';
 
     /**
      * Inject deps (UrlInterface)
@@ -25,13 +25,13 @@ class FaqActions extends Column
         protected UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
         parent::__construct(
-        $context,
-        $uiComponentFactory,
-        $components,
-        $data);
+            $context,
+            $uiComponentFactory,
+            $components,
+            $data
+        );
     }
 
     /**

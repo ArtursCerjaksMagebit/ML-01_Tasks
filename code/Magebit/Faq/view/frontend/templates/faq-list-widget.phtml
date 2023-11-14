@@ -3,7 +3,7 @@
 /** @var \Magento\Framework\Escaper $escaper */
 $activeFaqs = $block->getFaqsByStatus((int)$block->getData('status'));
 ?>
-<?php if(isset($activeFaqs[0])): ?>
+<?php if (isset($activeFaqs[0])): ?>
     <div class="faq-container">
         <h3 class="faq-title"><?= $escaper->escapeHtml($block->getTitle()) ?></h3>
         <?php foreach ($activeFaqs as $faq): ?>

@@ -18,8 +18,8 @@ class FaqManagement implements FaqManagementInterface
      */
     public function __construct(
         protected FaqRepositoryInterface $faqRepository,
-    )
-    {}
+    ) {
+    }
 
     /**
      * @inheritDoc
@@ -38,10 +38,13 @@ class FaqManagement implements FaqManagementInterface
     }
 
     /**
-     * Changes status, DRY
+     * Changes status
      *
-     * @throws NoSuchEntityException
+     * @param int|string $id
+     * @param int $status
+     * @return FaqModelInterface
      * @throws CouldNotSaveException
+     * @throws NoSuchEntityException
      */
     private function changeStatus(int|string $id, int $status): FaqModelInterface
     {

@@ -7,6 +7,7 @@ use Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult;
 /** Collection for FAQ listing */
 class Collection extends SearchResult
 {
+    /** @var string name of main table */
     protected $_mainTable = FaqModelInterface::MAIN_TABLE_NAME;
 
     /**

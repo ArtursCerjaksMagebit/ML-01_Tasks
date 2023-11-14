@@ -40,7 +40,6 @@ interface FaqRepositoryInterface
      */
     public function save(FaqModelInterface $faq): FaqModelInterface;
 
-
     /**
      * Delete faq by object
      *

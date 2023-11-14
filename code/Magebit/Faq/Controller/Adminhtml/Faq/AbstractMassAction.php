@@ -17,8 +17,7 @@ use Magento\Ui\Component\MassAction\Filter;
 /** Contains protected functions for mass actions to inherit from */
 abstract class AbstractMassAction extends AbstractAction
 {
-
-
+    /** @var string redirect url */
     protected string $redirectUrl = '*/*/index';
 
     /**
@@ -32,8 +31,7 @@ abstract class AbstractMassAction extends AbstractAction
         protected CollectionFactory $collectionFactory,
         protected FaqManagementInterface $faqManagement,
         protected FaqRepositoryInterface $faqRepository
-    )
-    {
+    ) {
         parent::__construct(
             $context,
             $filter,

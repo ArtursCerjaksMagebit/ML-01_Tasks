@@ -21,8 +21,7 @@ class Edit extends AbstractAction implements HttpGetActionInterface
         Filter $filter,
         FaqRepositoryInterface $faqRepository,
         protected PageFactory $pageFactory
-    )
-    {
+    ) {
         parent::__construct(
             $context,
             $filter,

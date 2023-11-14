@@ -23,13 +23,14 @@ class Faq extends Template implements BlockInterface
     public function __construct(
         protected FaqRepository $faqRepository,
         Template\Context $context,
-        array $data = [])
-    {
+        array $data = []
+    ) {
         parent::__construct($context, $data);
     }
 
     /**
      * Gets list of FAQs by status (default 1 = active)
+     *
      * And sorts them by position
      *
      * @param int|string $status

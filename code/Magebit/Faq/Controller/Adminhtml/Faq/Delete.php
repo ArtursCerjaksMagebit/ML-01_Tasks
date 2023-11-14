@@ -10,8 +10,6 @@ class Delete extends AbstractAction implements HttpPostActionInterface
 {
     /**
      * Delete FAQ based on param id
-     *
-     * @inheritDoc
      */
     public function execute(): ResultInterface
     {

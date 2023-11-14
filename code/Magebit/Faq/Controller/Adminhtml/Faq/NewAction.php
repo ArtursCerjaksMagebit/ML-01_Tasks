@@ -2,7 +2,6 @@
 
 namespace Magebit\Faq\Controller\Adminhtml\Faq;
 
-
 use Magebit\Faq\Api\FaqRepositoryInterface;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
@@ -16,8 +15,6 @@ class NewAction extends AbstractAction
 {
     /**
      * Redirect to form for editing a FAQ (also used for new)
-     *
-     * @inheritDoc
      */
     public function execute()
     {

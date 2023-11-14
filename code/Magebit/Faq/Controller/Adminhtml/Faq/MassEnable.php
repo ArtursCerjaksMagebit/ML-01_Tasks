@@ -20,7 +20,7 @@ class MassEnable extends AbstractMassAction implements HttpPostActionInterface
     protected function massAction(AbstractCollection|Collection $collection): ResponseInterface|ResultInterface
     {
         $questionsEnabled = 0;
-        foreach($collection->getAllIds() as $questionId) {
+        foreach ($collection->getAllIds() as $questionId) {
             $this->faqManagement->enableQuestion($questionId);
             $questionsEnabled++;
         }

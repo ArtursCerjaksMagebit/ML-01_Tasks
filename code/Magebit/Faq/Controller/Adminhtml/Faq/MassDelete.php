@@ -20,7 +20,7 @@ class MassDelete extends AbstractMassAction implements HttpPostActionInterface
     public function massAction(AbstractCollection|Collection $collection): ResponseInterface|ResultInterface
     {
         $questionsDeleted = 0;
-        foreach($collection->getAllIds() as $questionId) {
+        foreach ($collection->getAllIds() as $questionId) {
             $this->faqRepository->deleteById($questionId);
             $questionsDeleted++;
         }

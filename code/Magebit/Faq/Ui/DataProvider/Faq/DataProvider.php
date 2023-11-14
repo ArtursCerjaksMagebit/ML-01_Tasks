@@ -37,8 +37,7 @@ class DataProvider extends ModifierPoolDataProvider implements DataProviderInter
         array $meta = [],
         array $data = [],
         PoolInterface $pool = null
-    )
-    {
+    ) {
         $this->collection = $this->faqCollectionFactory->create();
         parent::__construct(
             $name,

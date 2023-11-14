@@ -10,7 +10,7 @@ use Magento\Ui\Component\Control\Container;
  */
 class Save implements ButtonProviderInterface
 {
-
+    /** @var string name of form where used */
     protected string $targetName = 'magebit_faq_faq_form.magebit_faq_faq_form';
 
     /**

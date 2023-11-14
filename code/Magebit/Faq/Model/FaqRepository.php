@@ -27,8 +27,8 @@ class FaqRepository implements FaqRepositoryInterface
         protected FaqModelInterface $faq,
         protected FaqResourceModel $faqResourceModel,
         protected FaqCollectionFactory $faqCollectionFactory,
-    )
-    {}
+    ) {
+    }
 
     /**
      * @inheritDoc

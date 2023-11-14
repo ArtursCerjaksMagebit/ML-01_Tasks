@@ -6,7 +6,6 @@ use Magento\Framework\App\ActionInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
-
 /** Displays page of FAQs for frontend */
 class Index implements ActionInterface
 {
@@ -18,7 +17,6 @@ class Index implements ActionInterface
     public function __construct(
         private readonly PageFactory $pageFactory
     ) {
-
     }
 
     /**

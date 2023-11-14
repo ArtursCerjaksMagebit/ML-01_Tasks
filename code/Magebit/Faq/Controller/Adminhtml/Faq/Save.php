@@ -27,8 +27,7 @@ class Save extends AbstractAction
         FaqRepositoryInterface $faqRepository,
         private readonly FaqModelFactory $faqModelFactory,
         private readonly DataPersistorInterface $dataPersistor
-    )
-    {
+    ) {
         parent::__construct(
             $context,
             $filter,
@@ -40,6 +39,7 @@ class Save extends AbstractAction
      * Saves form data and redirects user
      *
      * In case error happens, form data persists in 'magebit_faq_form' key
+     *
      * @return ResultInterface
      * @throws NoSuchEntityException
      */
@@ -74,9 +74,10 @@ class Save extends AbstractAction
                     return $this->generateRedirectToNewForm();
                 }
 
-
             } catch (\Exception $e) {
-                $this->messageManager->addErrorMessage(__('An error occurred while saving the item: ' . $e->getMessage()));
+                $this->messageManager->addErrorMessage(
+                    __('An error occurred while saving the item: ' . $e->getMessage())
+                );
                 $this->dataPersistor->set('magebit_faq_form', $data);
             }
         }
@@ -84,6 +85,11 @@ class Save extends AbstractAction
         return $this->generateRedirectToForm($id, true);
     }
 
+    /**
+     * Generates redirect to form
+     *
+     * @return ResultInterface
+     */
     protected function generateRedirectToNewForm(): ResultInterface
     {
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);

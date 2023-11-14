@@ -14,20 +14,28 @@ use Magento\Ui\Component\MassAction\Filter;
  */
 abstract class AbstractAction extends Action
 {
+    /** @var string redirect to grid url */
     protected string $redirectGridUrl = '*/*/index';
+    /** @var string redirect to form url */
     protected string $redirectFormUrl = '*/*/edit';
 
     /**
      * Authorization level of a basic admin session
      */
-    const ADMIN_RESOURCE = 'Magebit_Faq::faq_manage';
+    public const ADMIN_RESOURCE = 'Magebit_Faq::faq_manage';
 
+    /**
+     * Injects dependencies (Filter and Faq Repository)
+     *
+     * @param Context $context
+     * @param Filter $filter
+     * @param FaqRepositoryInterface $faqRepository
+     */
     public function __construct(
         Context $context,
         protected Filter $filter,
         protected FaqRepositoryInterface $faqRepository,
-    )
-    {
+    ) {
         parent::__construct($context);
     }
 

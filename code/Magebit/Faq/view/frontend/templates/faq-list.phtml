@@ -3,7 +3,7 @@
 /** @var \Magento\Framework\Escaper $escaper */
 $activeFaqs = $block->getFaqsByStatus();
 ?>
-<?php if(isset($activeFaqs[0])): ?>
+<?php if (isset($activeFaqs[0])): ?>
     <div class="faq-container">
         <h3 class="faq-title">Frequently Asked Questions</h3>
         <?php foreach ($activeFaqs as $faq): ?>

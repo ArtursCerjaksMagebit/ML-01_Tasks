@@ -12,11 +12,13 @@ class Back implements ButtonProviderInterface
 {
     /**
      * Injects dependencies (Context)
+     *
+     * @param Context $context
      */
     public function __construct(
         protected Context $context
-    )
-    {}
+    ) {
+    }
 
     /**
      * Retrieve button configuration

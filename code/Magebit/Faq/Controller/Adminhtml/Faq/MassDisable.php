@@ -20,7 +20,7 @@ class MassDisable extends AbstractMassAction implements HttpPostActionInterface
     protected function massAction(AbstractCollection|Collection $collection): ResponseInterface|ResultInterface
     {
         $questionsDisabled = 0;
-        foreach($collection->getAllIds() as $questionId) {
+        foreach ($collection->getAllIds() as $questionId) {
             $this->faqManagement->disableQuestion($questionId);
             $questionsDisabled++;
         }

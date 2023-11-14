@@ -7,15 +7,15 @@ use Magento\Framework\Api\AttributeValue;
 /** @api for FaqModel class */
 interface FaqModelInterface
 {
-    const MAIN_TABLE_NAME = 'magebit_faq';
-    const KEY_ID = 'id';
-    const KEY_QUESTION = 'question';
-    const KEY_ANSWER = 'answer';
-    const KEY_STATUS = 'status';
-    const KEY_POSITION = 'position';
-    const KEY_UPDATED_AT = 'updated_at';
+    public const MAIN_TABLE_NAME = 'magebit_faq';
+    public const KEY_ID = 'id';
+    public const KEY_QUESTION = 'question';
+    public const KEY_ANSWER = 'answer';
+    public const KEY_STATUS = 'status';
+    public const KEY_POSITION = 'position';
+    public const KEY_UPDATED_AT = 'updated_at';
 
-    const ATTRIBUTES = [
+    public const ATTRIBUTES = [
         self::KEY_ID,
         self::KEY_QUESTION,
         self::KEY_ANSWER,
